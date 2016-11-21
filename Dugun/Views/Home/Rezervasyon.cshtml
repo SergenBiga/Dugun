@@ -1,0 +1,81 @@
+﻿@model Dugun.Models.Rezervasyon
+<!--FORM-->
+<div id="form">
+    <div class="container">
+        <h3>Rezervasyon</h3>
+        <div class="heart content-style"></div>
+
+        <div class="row">
+            <div class="col-md-3 rsvp-image"><img src="/Content/images/rsvp-left.png" alt="rsvp" /></div><!--end col-md-3-->
+            <div class="col-md-6">
+                <div class="contact-form">
+                @using (Html.BeginForm("Index","Home",FormMethod.Post,new { @id="contact-form",@class="form-horizontal" }))
+                {
+                    <div class="hatalar">
+                        @Html.ValidationSummary()
+                    </div>
+                    @*<form method="POST" id="contact-form" class="form-horizontal" action="contact-form.php" onSubmit="alert('Thank you for your feedback!');">*@
+                        <div class="form-group">
+                             @Html.LabelFor(x=>x.AdSoyad)
+                             @*<label>İsim Soyisim</label>*@
+                             @*<input class="form-control" type="text" name="name" required />*@
+                             @Html.TextBoxFor(x=>x.AdSoyad,new { @class="form-control" })
+                             @Html.ValidationMessageFor(x=>x.AdSoyad)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x=>x.Email)
+                            @*<input class="form-control" name="email" type="text" required />*@
+                            @Html.TextBoxFor(x=>x.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x=>x.Email)
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x=>x.KatilacakMi)
+                            <input id="radio_1" type="radio" name="KatilacakMi" value="true">
+                            <label class="attending-text" for="radio_1">Evet, katılacağım.</label>
+                            <input id="radio_2" type="radio" name="KatilacakMi" value="false">
+                            <label class="attending-text" for="radio_2">Hayır, gelemeyeceğim.</label>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x=>x.Mesaj)
+                            @*<textarea class="form-control" name="message" rows="6" maxlength="1024" required></textarea>*@
+                            @Html.TextAreaFor(x=>x.Mesaj, new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-default" type="reset">Temizle</button>
+                                <input type="hidden" name="save" value="contact-form">
+                                <button class="btn btn-success" id="submit" type="submit">Gönder</button>
+                            </div>
+                        </div>
+                    @*</form>*@
+               } 
+              </div><!--end contact-form--> 
+            </div><!--end col-md-6-->
+            <div class="col-md-3 rsvp-image"><img src="/Content/images/rsvp-right.png" alt="rsvp" /></div><!--end col-md-3-->
+        </div><!--end row-->
+
+    </div><!--end container-->
+</div><!--end #form-->
+<!--END FORM-->
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<div id="dialog" title="Teşekkürler">
+    <p>Randevu talebiniz tarafımıza iletilmiştir.</p>
+</div>
+
+<script>
+    function TesekkurEt() {
+        $("#dialog").dialog();
+    }
+
+    @ViewBag.sonuc
+</script>
